@@ -14,7 +14,7 @@ Iterative Transformation Grapher - Python-fu math rendering plugin for GIMP
 **A Little More**
 - All python syntax is allowed (ternary expressions etc).  
 - If the color layers differ they will blend to create other colors.  If they are the same, the results will be grayscale.
-- _Oversample_ averages the value of the 16 points surronding the target pixel in a 4x4 grid.  In essence, it anti-aliases sharp lines.
+- _Oversample_ averages the value of the 16 points surrounding the target pixel in a 4x4 grid.  In essence, it anti-aliases sharp lines.
 - _Escape Threshold_ caps the values produced by the transformations.
 - _Prep_ will scale the current image to one of the size specified by _Longedge_ (in inches, assuming 300dpi).
 - Together, _scale_ and _center_ determine what points each pixel represents.
@@ -54,3 +54,27 @@ Iterative Transformation Grapher - Python-fu math rendering plugin for GIMP
 **Questions / Suggestions**
 - Contact me at awspringman AT gmail DOT com
 - Participate in the project at [GitHub](https://github.com/andrewspringman/itgrapher)
+
+**Parameters**
+- _x equation <--_, _y equation <--_, _z equation <--_ and _t equation <--_ are Python code strings intended to define the new value of x, y, z, and t for each iteration.  That is, they, together, define the transformation.  Note that only x and y correspond to actually pixels in the image.  So, the user needs to define starting points for z and t in the next two parameters.  (If you are trying to render the Mandelbrot set, set the z and t equations to simply z and t respectively.  This will act as C in Z^2+C).
+- _starting z_ and _starting t_ define the initial values of z and t respectively.  Any Python code is allowed.  (For the Mandelbrot set, set them to x and y respectively).
+- _velocity equation <--_ is calculated for every point in the image for each iteration.  Any Python code is allowed.  Note the use of old_x, old_y, old_z, and old_t.  These are the values for the previous iteration (or, in the case of the first iteration, the starting values defined by the image, scale and center or starting_z and starting_t).
+- _iterations_ is the number of times to iterate the transformation.  It must be an positive integer to work.
+scale is the size of each pixel.  A small scale zooms in.  A large scale zooms out.  Any Python code is allowed and the result is interpreted as a floating point number.
+- _red_iteration_, _green iteration_, and _blue iteration_ determine which iteration is used to determine the values for each color.  Iterations are numbered starting with 1 and go up to the value entered in _iterations_.  There is no point in setting _iterations_ to something lower than the highest of these three.  It will just be doing extra calculations it never uses.  Making these three the same produces greyscale images.  Otherwise the three colors blend to give other colors in the standard RGB scheme.
+- _luminosity_ is just a floating point constant available in the value calculations.  By default it make image lighter as it goes up and darker as it goes down.  No code is allowed here.
+- _red value <--_, _green value <--_, and _blue value <--_
+- _center_ is an x,y pair determining what point in the plane is represented by the center of the image.  It must be floating point numbers separated by a comma.  No code is allowed.
+- _oversample_: if selected, calculates the values for the 16 points around the current point in a 4x4 and uses the average for the point.
+- _escape threshold_ is the maximum number allowed by each transformation calculation.  The calculation is done first and then this limit is applied.  Set to 0 if you don't want to set a threshold.  This must be a floating point number.  No code is allowed.
+- _prep_: if selected, resizes the image to be 300 pixels along the longest edge times the value provided in _long edge_.
+- _long edge_ the size in inches at 300dpi that _prep_ should scale the longest edge of the image to.  It will maintain the aspect ratio. This is a floating point number.  No code is allowed.
+
+**Variables**
+- _x_, _y_, _z_, and _t_ are the previous value in _x equation <--_ etc.  They are the new value by _velocity equation_.
+- Use _old_x_ etc for the previous value in _velocity equation_.
+- _luminosity_ is just a user provided floating point constant.  Use it anywhere Python code is allowed.
+- _i_ contains the number of the current iteration (starting with 1).  It is useful for causing the transformations to change at different iterations, but can be used anywhere Python code is allowed, except the _starting t_ and _starting z_.
+**Note: I've never used these as inputs, but they should be available everywhere Python code is allowed.**
+- _width_ and _height_ are the size of the image in pixels.
+- _x_center_ and _y_center_ are the x and y values of the center parameter.
