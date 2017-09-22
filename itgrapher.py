@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#This software is licensed under the CC-GNU GPL.  See http://creativecommons.org/licenses/GPL/2.0/
+#This software is licensed under the CC-GNU GPL.  See http://creativecommons.org/licenses/GPL/3.0/
 #Under Windows, put me in the lib/gimp/2.0/plug-ins directory under your GIMP installation.
 #Under Linux: put me in ~/.Gimp-2.4/plugins
 
