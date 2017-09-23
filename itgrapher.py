@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-#This software is licensed under the CC-GNU GPL.  See http://creativecommons.org/licenses/GPL/3.0/
-#Under Windows, put me in the lib/gimp/2.0/plug-ins directory under your GIMP installation.
-#Under Linux: put me in ~/.Gimp-2.4/plugins
+#This software is licensed under the GPL 3.0.
+#(c) 2010-2017 Andrew Springman
+#Read instructions, report problems, contribute or fork the project at https://github.com/andrewspringman/itgrapher
+#Contact me at awspringman AT gmail DOT com
 
 from gimpfu import *
 
