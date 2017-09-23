@@ -7,7 +7,7 @@ Iterative Transformation Grapher - Python-fu math rendering plugin for GIMP
 
 **Bird's Eye View**
 - Grapher because ITGrapher graphs (renders) images of the math entered.
-- Transformation because the math entered determines where the point define by each pixel "moves" to.
+- Transformation because the math entered determines where the points defined by each pixel "moves" to.
 - Iterative because the transformations are iterated (repeated).
 - The distance each point moves in an iteration determines the value of that pixel.  However, what iteration applies to what color and how to calculate the distance is up to you.
 
